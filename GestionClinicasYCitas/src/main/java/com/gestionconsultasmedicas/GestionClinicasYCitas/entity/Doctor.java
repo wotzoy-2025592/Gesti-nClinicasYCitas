@@ -2,6 +2,9 @@ package com.gestionconsultasmedicas.GestionClinicasYCitas.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jdk.jshell.Diag;
+
+import java.util.List;
 
 @Entity
 @Table(name = "doctores")
@@ -24,10 +27,17 @@ public class Doctor {
     @Column(nullable = false)
     private int estado;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("patientDoctor")
-    @JoinColumn(name = "idPatient")
-    private Doctor doctorPatient;
+    @OneToMany(mappedBy = "patientDoctor", cascade = CascadeType.ALL)
+    private List<Patient> doctorPatient;
+
+    @OneToMany(mappedBy = "diagnosisDoctor", cascade = CascadeType.ALL)
+    private List<Diagnosis> doctorDiagnosis;
+
+    @OneToMany(mappedBy = "prescriptionDoctor", cascade = CascadeType.ALL)
+    private List<Prescription> doctorPrescription;
+
+    @OneToMany(mappedBy = "specialityDoctor", cascade = CascadeType.ALL)
+    private List<Speciality> doctorSpeciality;
 
 
     public Doctor(){

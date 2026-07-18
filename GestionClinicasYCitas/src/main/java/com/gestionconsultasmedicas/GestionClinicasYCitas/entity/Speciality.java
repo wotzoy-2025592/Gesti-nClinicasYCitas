@@ -19,8 +19,10 @@ public class Speciality {
     //Medico
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("doctorSpeciality")
-    @JoinColumn(name = "idDoctor")
+    @JoinColumn(name = "idDoctor", foreignKey = @ForeignKey(name = "FK_speciality_doctor"))
     private Speciality specialityDoctor;
+
+
 
     public Speciality() {
 

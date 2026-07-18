@@ -20,16 +20,20 @@ public class User {
     @Column(nullable = false)
     private String emailUser;
 
-    @OneToMany(mappedBy = "patientUser", cascade = CascadeType.ALL)
-    private List<User> userPatient;
-
-    @OneToMany(mappedBy = "doctorUser", cascade = CascadeType.ALL)
-    private List<User> userDoctor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("patientUser")
+    @JoinColumn(name = "idPatient", foreignKey = @ForeignKey(name = "FK_user_patient"))
+    private Patient userPatient;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("rolesUser")
-    @JoinColumn(name = "idRole")
-    private User userRole;
+    @JsonIgnoreProperties("doctorUser")
+    @JoinColumn(name = "idDoctor", foreignKey = @ForeignKey(name = "FK_user_doctor"))
+    private Doctor userDoctor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("roleUser")
+    @JoinColumn(name = "idRole", foreignKey = @ForeignKey(name = "FK_user_role"))
+    private Role userRole;
 
     public User() {
 

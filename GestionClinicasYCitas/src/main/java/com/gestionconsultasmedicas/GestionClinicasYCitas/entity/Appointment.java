@@ -1,5 +1,6 @@
 package com.gestionconsultasmedicas.GestionClinicasYCitas.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -20,9 +21,18 @@ public class Appointment {
     @Column(nullable = false)
     private int estadoCita; // Resuelto - Pendiente
 
-
     @OneToMany(mappedBy = "notificationCita", cascade = CascadeType.ALL)
-    private List<Appointment> appointmentNotificacion;
+    private List<Notification> appointmentNotificacion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("doctorAppointment")
+    @JoinColumn(name = "idDoctor", foreignKey = @ForeignKey(name = "FK_appointment_doctor"))
+    private Doctor appointmentDoctor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("patientAppointment")
+    @JoinColumn(name = "idPatient", foreignKey = @ForeignKey(name = "FK_appointment_patient"))
+    private Patient appointmentPatient;
 
     public Appointment() {
 

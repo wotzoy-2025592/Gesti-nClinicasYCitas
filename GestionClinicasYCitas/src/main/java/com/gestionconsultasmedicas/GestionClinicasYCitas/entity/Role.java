@@ -2,6 +2,8 @@ package com.gestionconsultasmedicas.GestionClinicasYCitas.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -14,9 +16,8 @@ public class Role {
     @Column(nullable = false)
     private String role;
 
-    //Un usuario puede tener varios roles
-
-    //User
+    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL)
+    private List<User> roleUser;
 
     public Role() {
 
