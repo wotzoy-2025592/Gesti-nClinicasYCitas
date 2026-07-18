@@ -27,7 +27,7 @@ public class Patient {
 
     @JsonIgnoreProperties("userPatient")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUser", foreignKey = @ForeignKey "FK_patient_user")
+    @JoinColumn(name = "idUser")
     private Patient patientUser;
 
 

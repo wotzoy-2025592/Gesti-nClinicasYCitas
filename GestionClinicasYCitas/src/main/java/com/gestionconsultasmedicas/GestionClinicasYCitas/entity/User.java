@@ -1,5 +1,6 @@
 package com.gestionconsultasmedicas.GestionClinicasYCitas.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,6 +25,11 @@ public class User {
 
     @OneToMany(mappedBy = "doctorUser", cascade = CascadeType.ALL)
     private List<User> userDoctor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("rolesUser")
+    @JoinColumn(name = "idRole")
+    private User userRole;
 
     public User() {
 

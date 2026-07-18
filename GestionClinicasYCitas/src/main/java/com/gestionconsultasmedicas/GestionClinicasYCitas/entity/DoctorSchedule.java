@@ -22,7 +22,7 @@ public class DoctorSchedule {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("doctorDocSchedule")
-    @JoinColumn(name = "idDoctor", foreignKey = ForeignKey)
+    @JoinColumn(name = "idDoctor")
     private DoctorSchedule doctorWork;
 
     public DoctorSchedule() {

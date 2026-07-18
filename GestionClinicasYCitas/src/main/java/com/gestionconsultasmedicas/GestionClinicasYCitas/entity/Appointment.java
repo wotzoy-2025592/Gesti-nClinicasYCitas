@@ -3,6 +3,7 @@ package com.gestionconsultasmedicas.GestionClinicasYCitas.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "cita")
@@ -20,7 +21,8 @@ public class Appointment {
     private int estadoCita; // Resuelto - Pendiente
 
 
-
+    @OneToMany(mappedBy = "notificationCita", cascade = CascadeType.ALL)
+    private List<Appointment> appointmentNotificacion;
 
     public Appointment() {
 

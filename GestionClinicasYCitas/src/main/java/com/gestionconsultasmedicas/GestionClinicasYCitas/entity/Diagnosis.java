@@ -14,6 +14,8 @@ public class Diagnosis {
     @Column(nullable = false)
     private String descripcion;
 
+    //Datos del paciente - Medico asignado
+
     public Diagnosis() {
 
     }
